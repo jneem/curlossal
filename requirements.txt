@@ -1,2 +1,2 @@
 svgpathtools>=1.4.0
-clickgen==1.2.0
+clickgen==2.1.0

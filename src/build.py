@@ -2,8 +2,8 @@ import outline
 import cfg
 import subprocess
 from pathlib import Path
-from clickgen.builders import XCursor
-from clickgen.core import CursorAlias
+from clickgen.parser import open_blob
+from clickgen.writer import to_x11
 
 SCALE = 0.625
 
@@ -37,11 +37,15 @@ class Builder:
     def create_xcursors(self):
         for (name, hot) in self.hot.items():
             png_path = self.out_dir + '/' + name + '.png'
+            out_path = self.out_dir + '/cursors/' + name
             hot = (int(hot[0] * SCALE), int(hot[1] * SCALE))
             print(hot)
-            with CursorAlias.from_bitmap(png=[png_path], hotspot=hot) as alias:
-                x_cfg = alias.create(sizes=[(int(256 * SCALE), int(256 * SCALE))])
-                XCursor.create(alias_file=x_cfg, out_dir=Path(self.out_dir))
+            with open(png_path, "rb") as png_file:
+                cur = open_blob([png_file.read()], hotspot=hot)
+
+                xresult = to_x11(cur.frames)
+                with open(out_path, "wb") as out_file:
+                    out_file.write(xresult)
 
 
 b = Builder()

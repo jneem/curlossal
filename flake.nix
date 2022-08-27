@@ -28,7 +28,7 @@
         # Customize ends
 
       pkgs = nixpkgs.legacyPackages.${system};
-      mach-nix-wrapper = import mach-nix { inherit pkgs pypiDataRev; python = "python310"; };
+      mach-nix-wrapper = import mach-nix { inherit pkgs python pypiDataRev; };
       requirements = builtins.readFile ./requirements.txt;
       pythonShell = mach-nix-wrapper.mkPythonShell {
         inherit requirements;
@@ -58,11 +58,13 @@
         ];
             
         buildPhase = ''
-          python build.py
+          mkdir -p out/cursors
+          python src/build.py
         '';
             
         installPhase = ''
-          install -dm 0755 out/cursors $out/share/cursors
+          mkdir -p $out/share/cursors
+          install -m 0755 out/cursors/* $out/share/cursors
         '';
       };
     });
