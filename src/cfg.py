@@ -27,8 +27,11 @@ class Copy:
 HOT = {
     'bd_double_arrow': (128, 128),
     'left_ptr': (64, 16),
+    'pointer': (64, 16),
     'sb_h_double_arrow': (128, 128),
     'xterm': (128, 128),
+    'nw_resize': (16, 16),
+    'n_resize': (16, 128),
 }
 
 TRANSFORM = {
@@ -44,4 +47,10 @@ TRANSFORM = {
     'ibeam': ('xterm', Copy()),
     'arrow': ('left_ptr', Copy()),
     'default': ('left_ptr', Copy()),
+    'ne_resize': ('nw_resize', Rotate(90)),
+    'se_resize': ('nw_resize', Rotate(180)),
+    'sw_resize': ('nw_resize', Rotate(270)),
+    'e_resize': ('n_resize', Rotate(90)),
+    's_resize': ('n_resize', Rotate(180)),
+    'w_resize': ('n_resize', Rotate(270)),
 }

@@ -13,20 +13,21 @@ class Builder:
     hot = cfg.HOT
     to_transform = cfg.TRANSFORM
     fill_color = 'black'
+    fill_opacity = 0.7
     stroke_color = '#00eaff'
-    stroke_width = 12
+    stroke_width = 8
 
     def outline_svgs(self):
         for (name, hot) in self.hot.items():
             svg_name = self.in_dir + '/' + name + '.svg'
             out_name = self.out_dir + '/' + name + '.svg'
-            outline.outline_file(svg_name, out_name, self.fill_color, self.stroke_color, self.stroke_width)
+            outline.outline_file(svg_name, out_name, self.fill_color, self.fill_opacity, self.stroke_color, self.stroke_width)
 
         for (out_name, (in_name, transform)) in self.to_transform.items():
             svg_path = self.in_dir + '/' + in_name + '.svg'
             self.hot[out_name] = transform.hot(self.hot[in_name])
             out_path = self.out_dir + '/' + out_name + '.svg'
-            outline.outline_transform_file(svg_path, out_path, self.fill_color, self.stroke_color, self.stroke_width, transform)
+            outline.outline_transform_file(svg_path, out_path, self.fill_color, self.fill_opacity, self.stroke_color, self.stroke_width, transform)
 
     def render_svgs(self):
         for (name, hot) in self.hot.items():
