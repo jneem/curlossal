@@ -63,8 +63,9 @@
         '';
             
         installPhase = ''
-          mkdir -p $out/share/cursors
-          install -m 0755 out/cursors/* $out/share/cursors
+          install -dm 0755 $out/share/icons/Curlossal/cursors
+          cp out/cursors/* $out/share/icons/Curlossal/cursors
+          cp index.theme cursor.theme $out/share/icons/Curlossal/
         '';
       };
     });
