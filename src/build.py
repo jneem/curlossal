@@ -40,7 +40,6 @@ class Builder:
             png_path = self.out_dir + '/' + name + '.png'
             out_path = self.out_dir + '/cursors/' + name
             hot = (int(hot[0] * SCALE), int(hot[1] * SCALE))
-            print(hot)
             with open(png_path, "rb") as png_file:
                 cur = open_blob([png_file.read()], hotspot=hot)
 
