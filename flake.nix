@@ -48,7 +48,7 @@
           
           
       packages.default = pkgs.stdenv.mkDerivation {
-        pname = "big-cursor";
+        pname = "curlossal";
         version = "0.1.0";
         src = self;
         
