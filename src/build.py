@@ -16,7 +16,7 @@ class Builder:
     fill_color = 'black'
     fill_opacity = 0.8
     stroke_color = '#00eaff'
-    stroke_width = 4
+    stroke_width = 6
 
     def outline_svgs(self):
         for (name, hot) in self.hot.items():

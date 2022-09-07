@@ -35,8 +35,8 @@ def outline_transform_file(
     print(svg_attrs)
     dwg = svgwrite.Drawing(out_path, **svg_attrs)
 
-    blur_filter = dwg.defs.add(dwg.filter())
-    blur_filter.feGaussianBlur(in_='SourceGraphic', stdDeviation=2)
+    # blur_filter = dwg.defs.add(dwg.filter())
+    # blur_filter.feGaussianBlur(in_='SourceGraphic', stdDeviation=2)
 
     for p in paths:
         d = transform.path(p).d()
@@ -49,7 +49,7 @@ def outline_transform_file(
             stroke=stroke_color, stroke_width=stroke_width,
             stroke_linecap='round', stroke_linejoin='round',
             fill='none',
-            filter=blur_filter.get_funciri(),
+            # filter=blur_filter.get_funciri(),
             mask=mask.get_funciri())
 
         fill = svgwrite.path.Path(
