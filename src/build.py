@@ -14,9 +14,9 @@ class Builder:
     hot = cfg.HOT
     to_transform = cfg.TRANSFORM
     fill_color = 'black'
-    fill_opacity = 0.7
+    fill_opacity = 0.8
     stroke_color = '#00eaff'
-    stroke_width = 8
+    stroke_width = 4
 
     def outline_svgs(self):
         for (name, hot) in self.hot.items():
