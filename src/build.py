@@ -6,6 +6,7 @@ from clickgen.parser import open_blob
 from clickgen.writer import to_x11
 
 SCALE = 0.625
+SIZES = [160]
 
 class Builder:
     out_dir = 'out'
@@ -41,7 +42,7 @@ class Builder:
             out_path = self.out_dir + '/cursors/' + name
             hot = (int(hot[0] * SCALE), int(hot[1] * SCALE))
             with open(png_path, "rb") as png_file:
-                cur = open_blob([png_file.read()], hotspot=hot)
+                cur = open_blob([png_file.read()], hotspot=hot, sizes=SIZES)
 
                 xresult = to_x11(cur.frames)
                 with open(out_path, "wb") as out_file:
