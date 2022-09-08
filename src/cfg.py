@@ -36,7 +36,9 @@ HOT = {
 
 TRANSFORM = {
     'nwse-resize': ('bd_double_arrow', Copy()),
+    'size_fdiag': ('bd_double_arrow', Copy()),
     'fd_double_arrow': ('bd_double_arrow', Rotate(90)),
+    'size_bdiag': ('bd_double_arrow', Rotate(90)),
     'nesw-resize': ('bd_double_arrow', Rotate(90)),
     'sb_v_double_arrow': ('sb_h_double_arrow', Rotate(90)),
     'v_double_arrow': ('sb_h_double_arrow', Rotate(90)),
