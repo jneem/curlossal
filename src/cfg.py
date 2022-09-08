@@ -30,13 +30,12 @@ HOT = {
     'pointer': (64, 16),
     'sb_h_double_arrow': (128, 128),
     'xterm': (128, 128),
-    'nw_resize': (16, 16),
-    'n_resize': (16, 128),
+    'nw-resize': (16, 16),
+    'n-resize': (16, 128),
 }
 
 TRANSFORM = {
     'fd_double_arrow': ('bd_double_arrow', Rotate(90)),
-    'fcf1c3c7cd4491d801f1e1c78f100000': ('bd_double_arrow', Rotate(90)),
     'sb_v_double_arrow': ('sb_h_double_arrow', Rotate(90)),
     'v_double_arrow': ('sb_h_double_arrow', Rotate(90)),
     'double_arrow': ('sb_h_double_arrow', Rotate(90)),
@@ -47,10 +46,11 @@ TRANSFORM = {
     'ibeam': ('xterm', Copy()),
     'arrow': ('left_ptr', Copy()),
     'default': ('left_ptr', Copy()),
-    'ne_resize': ('nw_resize', Rotate(90)),
-    'se_resize': ('nw_resize', Rotate(180)),
-    'sw_resize': ('nw_resize', Rotate(270)),
-    'e_resize': ('n_resize', Rotate(90)),
-    's_resize': ('n_resize', Rotate(180)),
-    'w_resize': ('n_resize', Rotate(270)),
+    'ne-resize': ('nw-resize', Rotate(90)),
+    'se-resize': ('nw-resize', Rotate(180)),
+    'sw-resize': ('nw-resize', Rotate(270)),
+    'e-resize': ('n-resize', Rotate(90)),
+    's-resize': ('n-resize', Rotate(180)),
+    'w-resize': ('n-resize', Rotate(270)),
+    'hand2': ('pointer', Copy()),
 }
