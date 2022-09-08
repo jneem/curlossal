@@ -35,7 +35,9 @@ HOT = {
 }
 
 TRANSFORM = {
+    'nwse-resize': ('bd_double_arrow', Copy()),
     'fd_double_arrow': ('bd_double_arrow', Rotate(90)),
+    'nesw-resize': ('bd_double_arrow', Rotate(90)),
     'sb_v_double_arrow': ('sb_h_double_arrow', Rotate(90)),
     'v_double_arrow': ('sb_h_double_arrow', Rotate(90)),
     'double_arrow': ('sb_h_double_arrow', Rotate(90)),
@@ -48,9 +50,14 @@ TRANSFORM = {
     'default': ('left_ptr', Copy()),
     'ne-resize': ('nw-resize', Rotate(90)),
     'se-resize': ('nw-resize', Rotate(180)),
+    'bottom_right_corner': ('nw-resize', Rotate(180)),
     'sw-resize': ('nw-resize', Rotate(270)),
+    'bottom_left_corner': ('nw-resize', Rotate(270)),
     'e-resize': ('n-resize', Rotate(90)),
+    'right_side': ('n-resize', Rotate(90)),
     's-resize': ('n-resize', Rotate(180)),
+    'bottom_side': ('n-resize', Rotate(180)),
     'w-resize': ('n-resize', Rotate(270)),
+    'left_side': ('n-resize', Rotate(270)),
     'hand2': ('pointer', Copy()),
 }
