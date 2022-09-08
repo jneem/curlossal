@@ -9,7 +9,7 @@ class Rotate:
         s = math.sin(self.angle * math.pi / 180)
         c = math.cos(self.angle * math.pi / 180)
         p = (point[0] - 128, point[1] - 128)
-        q = (c * p[0] + s * p[1], - s * p[0] + c * p[1])
+        q = (c * p[0] - s * p[1], s * p[0] + c * p[1])
         return (q[0] + 128, q[1] + 128)
 
     def path(self, path):
