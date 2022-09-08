@@ -32,7 +32,6 @@ def outline_transform_file(
         transform):
     paths, _attrs, svg_attrs = svg2paths2(in_path)
     svg_attrs.pop('xmlns:svg', None)
-    print(svg_attrs)
     dwg = svgwrite.Drawing(out_path, **svg_attrs)
 
     # blur_filter = dwg.defs.add(dwg.filter())
