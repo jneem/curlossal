@@ -31,7 +31,7 @@ HOT = {
     'sb_h_double_arrow': (128, 128),
     'xterm': (128, 128),
     'nw-resize': (16, 16),
-    'n-resize': (16, 128),
+    'n-resize': (128, 16),
 }
 
 TRANSFORM = {
