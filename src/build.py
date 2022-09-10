@@ -5,8 +5,7 @@ from pathlib import Path
 from clickgen.parser import open_blob
 from clickgen.writer import to_x11
 
-SCALE = 0.625
-SIZES = [160]
+SIZES = [96, 128, 160]
 
 class Builder:
     out_dir = 'out'
@@ -34,13 +33,12 @@ class Builder:
         for (name, hot) in self.hot.items():
             svg_path = self.out_dir + '/' + name + '.svg'
             png_path = self.out_dir + '/' + name + '.png'
-            subprocess.run(["resvg", "-z", str(SCALE), svg_path, png_path])
+            subprocess.run(["resvg", svg_path, png_path])
 
     def create_xcursors(self):
         for (name, hot) in self.hot.items():
             png_path = self.out_dir + '/' + name + '.png'
             out_path = self.out_dir + '/cursors/' + name
-            hot = (int(hot[0] * SCALE), int(hot[1] * SCALE))
             with open(png_path, "rb") as png_file:
                 cur = open_blob([png_file.read()], hotspot=hot, sizes=SIZES)
 
