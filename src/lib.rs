@@ -2,6 +2,7 @@ use std::{collections::HashMap, path::Path};
 
 use nickel_lang_core::{eval::cache::CacheImpl, program::Program};
 use tiny_skia::{Mask, Paint, PathBuilder, Pixmap, Stroke, Transform};
+use xcursor::CursorImage;
 
 pub mod xcursor;
 
@@ -24,17 +25,6 @@ pub struct Cursor {
     paths: Vec<String>,
     hot: Point,
     rotation_degrees: f64,
-}
-
-impl Cursor {
-    pub fn rotated_hot(&self) -> Point {
-        let cos = self.rotation_degrees.cos();
-        let sin = self.rotation_degrees.sin();
-        Point {
-            x: self.hot.x * cos + self.hot.y * sin,
-            y: -self.hot.x * sin + self.hot.y * cos,
-        }
-    }
 }
 
 #[derive(serde::Deserialize, Debug)]
@@ -91,7 +81,7 @@ fn transform(deg: f64, nominal_scale: f64) -> Transform {
         .post_scale(nominal_scale as f32 / 256.0, nominal_scale as f32 / 256.0)
 }
 
-pub fn render_cursor(cursor: &Cursor, style: &Style) -> anyhow::Result<Pixmap> {
+pub fn render_cursor(cursor: &Cursor, style: &Style) -> anyhow::Result<CursorImage> {
     let mut pixmap = Pixmap::new(style.size, style.size).unwrap();
 
     let mut paint = Paint::default();
@@ -99,22 +89,12 @@ pub fn render_cursor(cursor: &Cursor, style: &Style) -> anyhow::Result<Pixmap> {
     paint.set_color_rgba8(r as u8, g as u8, b as u8, a as u8);
 
     let mut mask = Mask::new(style.size, style.size).unwrap();
+    let transform = transform(cursor.rotation_degrees, style.size as f64);
 
     for path in &cursor.paths {
         let path = parse_path(path)?;
-        pixmap.fill_path(
-            &path,
-            &paint,
-            tiny_skia::FillRule::Winding,
-            transform(cursor.rotation_degrees, style.size as f64),
-            None,
-        );
-        mask.fill_path(
-            &path,
-            tiny_skia::FillRule::Winding,
-            true,
-            transform(cursor.rotation_degrees, style.size as f64),
-        );
+        pixmap.fill_path(&path, &paint, tiny_skia::FillRule::Winding, transform, None);
+        mask.fill_path(&path, tiny_skia::FillRule::Winding, true, transform);
     }
     mask.invert();
 
@@ -129,14 +109,18 @@ pub fn render_cursor(cursor: &Cursor, style: &Style) -> anyhow::Result<Pixmap> {
     };
     for path in &cursor.paths {
         let path = parse_path(path)?;
-        pixmap.stroke_path(
-            &path,
-            &paint,
-            &stroke,
-            transform(cursor.rotation_degrees, style.size as f64),
-            Some(&mask),
-        );
+        pixmap.stroke_path(&path, &paint, &stroke, transform, Some(&mask));
     }
 
-    Ok(pixmap)
+    let mut hot_p = tiny_skia::Point {
+        x: cursor.hot.x as f32 - 128.0,
+        y: cursor.hot.y as f32 - 128.0,
+    };
+    transform.map_point(&mut hot_p);
+
+    Ok(CursorImage {
+        image: pixmap,
+        xhot: hot_p.x.round() as u32 + style.size / 2,
+        yhot: hot_p.y.round() as u32 + style.size / 2,
+    })
 }

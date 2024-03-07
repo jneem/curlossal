@@ -5,7 +5,7 @@ use std::{
 };
 
 use clap::Parser;
-use nickel_cursor::{load_theme, render_cursor, xcursor::CursorImage};
+use nickel_cursor::{load_theme, render_cursor};
 
 #[derive(Parser)]
 struct Args {
@@ -30,15 +30,9 @@ pub fn main() -> anyhow::Result<()> {
     let cursor_dir = theme_dir.join("cursors");
     std::fs::create_dir_all(&cursor_dir)?;
     for (name, cursor) in theme.cursors {
-        let pixmap = render_cursor(&cursor, &theme.style)?;
+        let image = render_cursor(&cursor, &theme.style)?;
         let out_path = cursor_dir.join(name);
         let out_file = File::create(out_path)?;
-        let hot = cursor.rotated_hot();
-        let image = CursorImage {
-            image: &pixmap,
-            xhot: hot.x.round() as u32,
-            yhot: hot.y.round() as u32,
-        };
         nickel_cursor::xcursor::write(out_file, &[image])?;
     }
 

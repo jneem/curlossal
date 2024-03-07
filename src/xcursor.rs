@@ -9,8 +9,8 @@ const BYTES_PER_PIXEL: u32 = 4;
 const IMAGE_TYPE: u32 = 0xfffd0002;
 const IMAGE_VERSION: u32 = 1;
 
-pub struct CursorImage<'a> {
-    pub image: &'a Pixmap,
+pub struct CursorImage {
+    pub image: Pixmap,
     pub xhot: u32,
     pub yhot: u32,
 }
