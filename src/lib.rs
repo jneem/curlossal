@@ -120,7 +120,7 @@ pub fn render_cursor(cursor: &Cursor, style: &Style) -> anyhow::Result<CursorIma
 
     Ok(CursorImage {
         image: pixmap,
-        xhot: hot_p.x.round() as u32 + style.size / 2,
-        yhot: hot_p.y.round() as u32 + style.size / 2,
+        xhot: (hot_p.x.round() + style.size as f32 / 2.0) as u32,
+        yhot: (hot_p.y.round() + style.size as f32 / 2.0) as u32,
     })
 }
