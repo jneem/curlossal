@@ -7,7 +7,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, fenix, flake-utils, ... }:
+  outputs = { self, nixpkgs, fenix, flake-utils, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         overlays = [ fenix.overlays.default ];
@@ -27,10 +27,22 @@
           pname = "nickel-cursor";
           version = "0.1.0";
 
-          src = ./.;
+          src = pkgs.lib.sources.sourceByRegex ./. ["Cargo\.*" "src" "src/.*"];
           cargoLock = {
             lockFile = ./Cargo.lock;
           };
+        };
+
+        curlossal = pkgs.stdenv.mkDerivation {
+          pname = "curlossal";
+          version = "0.2.0";
+          src = pkgs.lib.sources.sourceByRegex ./. [".*\.ncl"];
+
+          buildInputs = [ nickel-cursor ];
+
+          buildPhase = ''
+            ${nickel-cursor}/bin/nickel-cursor curlossal.ncl --out $out/share/icons/
+          '';
         };
       in
       with pkgs;
@@ -45,6 +57,7 @@
         };
 
         packages.nickel-cursor = nickel-cursor;
+        packages.default = curlossal;
       }
     );
 }

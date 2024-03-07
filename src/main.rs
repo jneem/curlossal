@@ -5,7 +5,7 @@ use std::{
 };
 
 use clap::Parser;
-use xcursor_writer::{load_theme, render_cursor, xcursor::CursorImage};
+use nickel_cursor::{load_theme, render_cursor, xcursor::CursorImage};
 
 #[derive(Parser)]
 struct Args {
@@ -39,7 +39,7 @@ pub fn main() -> anyhow::Result<()> {
             xhot: hot.x.round() as u32,
             yhot: hot.y.round() as u32,
         };
-        xcursor_writer::xcursor::write(out_file, &[image])?;
+        nickel_cursor::xcursor::write(out_file, &[image])?;
     }
 
     write_theme_file(theme_dir.join("cursor.theme"), &theme.name)?;
