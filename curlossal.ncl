@@ -1,4 +1,6 @@
 let { Cursor, CursorSet, CursorTheme, Style, color, .. } = import "cursor.ncl" in
+let basic_pointer = "M 222.4,174.4 H 129.6 L 64,240 V 16 Z" in
+let hourglass = "m 136.16,190.24 h 20.61 L 136.16,240 h 20.61 z" in
 {
   name = "Curlossal",
   style = {
@@ -9,16 +11,28 @@ let { Cursor, CursorSet, CursorTheme, Style, color, .. } = import "cursor.ncl" i
   }, 
   cursors = {
       left_ptr = {
-        paths = ["M 222.4,174.4 H 129.6 L 64,240 V 16 Z"],
+        paths = [basic_pointer],
         hot = { x = 64, y = 16 },
       },
 
-      pointer = {
+      hand1 = {
         paths = [
-          "M 222.4,174.4 H 129.6 L 64,240 V 16 Z",
-          "M 125.82,32.56 64,16 h 64 z",
-          "M 31.99635,71.423026 64,16 18.745169,61.25483 Z"
+          "M 63.867936 11.680424 A 4 4 0 0 0 59.867664 15.680697 A 4 4 0 0 0 63.867936 19.680452 A 4 4 0 0 0 64.000228 19.675802 L 64.000228 239.99982 L 129.59984 174.40021 L 222.39986 174.40021 L 66.600586 18.600415 A 4 4 0 0 0 67.867692 15.680697 A 4 4 0 0 0 63.867936 11.680424 z"
         ],
+        hot = { x = 64, y = 16 },
+      },
+
+      hand2 = {
+        paths = [
+          basic_pointer,
+          "M 112,20 80,16 112,12 Z",
+          "M 27.230447,47.112697 52.686292,27.313708 32.887301,52.769551 Z",
+        ],
+        hot = { x = 64, y = 16 },
+      },
+
+      left_ptr_watch = {
+        paths = [basic_pointer, hourglass],
         hot = { x = 64, y = 16 },
       },
 
@@ -37,12 +51,12 @@ let { Cursor, CursorSet, CursorTheme, Style, color, .. } = import "cursor.ncl" i
         hot = { x = 128, y = 128 },
       },
 
-      nw-resize = {
+      top_left_corner = {
         paths = ["M 16,16 V 128 L 48.8,48.8 128,16 Z"],
         hot = { x = 16, y = 16 },
       },
 
-      n-resize = {
+      top_side = {
         paths = ["m128 16 79.196 79.196L128 62.386l-79.196 32.81Z"],
         hot = { x = 128, y = 16 },
       },

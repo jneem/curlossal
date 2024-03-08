@@ -3,45 +3,32 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    fenix.url = "github:nix-community/fenix";
     flake-utils.url = "github:numtide/flake-utils";
+    nickel-cursor = {
+      url = "github:jneem/nickel-cursor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, fenix, flake-utils, ... }:
+  outputs = { nixpkgs, flake-utils, nickel-cursor, ... }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        overlays = [ fenix.overlays.default ];
         pkgs = import nixpkgs {
-          inherit system overlays;
+          inherit system;
         };
-        rust-toolchain = pkgs.fenix.latest.withComponents [
-          "cargo"
-          "clippy"
-          "rustc"
-          "rustfmt"
-          "rust-analyzer"
-          "rust-src"
-        ];
 
-        nickel-cursor = pkgs.rustPlatform.buildRustPackage {
-          pname = "nickel-cursor";
-          version = "0.1.0";
-
-          src = pkgs.lib.sources.sourceByRegex ./. ["Cargo\.*" "src" "src/.*"];
-          cargoLock = {
-            lockFile = ./Cargo.lock;
-          };
-        };
+        ncursor = nickel-cursor.packages.${system}.default;
 
         curlossal = pkgs.stdenv.mkDerivation {
           pname = "curlossal";
           version = "0.2.0";
           src = pkgs.lib.sources.sourceByRegex ./. [".*\.ncl"];
+          NICKEL_IMPORT_PATH = ncursor;
 
-          buildInputs = [ nickel-cursor ];
+          buildInputs = [ ncursor ];
 
           buildPhase = ''
-            ${nickel-cursor}/bin/nickel-cursor curlossal.ncl --out $out/share/icons/
+            ${ncursor}/bin/nickel-cursor curlossal.ncl --out $out/share/icons/
           '';
         };
       in
@@ -49,14 +36,13 @@
       {
         devShells.default = mkShell {
           buildInputs = [
-            cargo-outdated
             nickel
             nls
-            rust-toolchain
+            ncursor
           ];
+          NICKEL_IMPORT_PATH = ncursor;
         };
 
-        packages.nickel-cursor = nickel-cursor;
         packages.default = curlossal;
       }
     );
