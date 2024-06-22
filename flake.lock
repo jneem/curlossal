@@ -319,11 +319,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1719067682,
-        "narHash": "sha256-xssoXApQmQE2Z1S5VzfTCSc4LfbXU5cnTUvU8qgZryw=",
+        "lastModified": 1719069086,
+        "narHash": "sha256-+IpHfjtOjxj6pE9AtvL0SRi6G6mGraPwFReJqUeBvuI=",
         "owner": "jneem",
         "repo": "nickel-cursor",
-        "rev": "2790825da9ee40ce8eaf19c76794663a9f6b94a1",
+        "rev": "dd9f38b6463d05dfc45f1c86bac977cd1869d396",
         "type": "github"
       },
       "original": {
