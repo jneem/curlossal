@@ -1,8 +1,7 @@
 {
-  description = "Basic rust dev shell";
+  description = "Colossal cursors";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
     nickel-cursor = {
       url = "github:jneem/nickel-cursor";

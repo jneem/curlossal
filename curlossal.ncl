@@ -4,7 +4,7 @@ let hourglass = "m 136.16,190.24 h 20.61 L 136.16,240 h 20.61 z" in
 {
   name = "Curlossal",
   style = {
-    size = 128,
+    sizes = [64, 96, 128],
     fill_color = color.from_hex "000000d0",
     stroke_width = 6,
     stroke_color = color.from_hex "00eaffff",
