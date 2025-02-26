@@ -20,7 +20,7 @@
 
         curlossal = pkgs.stdenv.mkDerivation {
           pname = "curlossal";
-          version = "0.2.0";
+          version = "0.2.1";
           src = pkgs.lib.sources.sourceByRegex ./. [".*\.ncl"];
           NICKEL_IMPORT_PATH = ncursor;
 
