@@ -319,11 +319,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1740563360,
-        "narHash": "sha256-Rn63nwdbtJVAiTD6voHcVuNsAlY5Wm/R+PAJEiZecUk=",
+        "lastModified": 1747884982,
+        "narHash": "sha256-tWz7JQcRrpRoqU6edkdx67e+2X9c+4Fx/DCQO+CLjSQ=",
         "owner": "jneem",
         "repo": "nickel-cursor",
-        "rev": "0f7b126a84bcb4b2f458bb9939c3631e957b31a2",
+        "rev": "bf328e3e66ce7639b7b32964424271d1d3ea8bda",
         "type": "github"
       },
       "original": {
@@ -453,10 +453,10 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1739866667,
-        "narHash": "sha256-EO1ygNKZlsAC9avfcwHkKGMsmipUk1Uc0TbrEZpkn64=",
-        "path": "/nix/store/kdynjy1mbgkdg4p196v9gx6ljpf7q4nk-source",
-        "rev": "73cf49b8ad837ade2de76f87eb53fc85ed5d4680",
+        "lastModified": 1742889210,
+        "narHash": "sha256-hw63HnwnqU3ZQfsMclLhMvOezpM7RSB0dMAtD5/sOiw=",
+        "path": "/nix/store/4m21g6b3bq78vn5skaxjmqwg7fnir87j-source",
+        "rev": "698214a32beb4f4c8e3942372c694f40848b360d",
         "type": "path"
       },
       "original": {
